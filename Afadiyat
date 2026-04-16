@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Afadiyat - Natural Health Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins;}
+
+body{background:#f6f6f6;}
+
+/* HEADER */
+header{
+  background:#1b5e20;
+  color:white;
+  padding:15px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+header h1{font-size:20px;}
+
+.cart-box{
+  background:white;
+  color:#1b5e20;
+  padding:5px 10px;
+  border-radius:20px;
+  font-weight:600;
+}
+
+/* HERO */
+.hero{
+  background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),
+  url('https://images.unsplash.com/photo-1606787366850-de6330128bfc') center/cover;
+  height:60vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  color:white;
+  padding:20px;
+}
+
+.hero h2{font-size:30px;}
+.hero p{margin:10px 0;}
+.hero a{
+  background:#4caf50;
+  color:white;
+  padding:12px 20px;
+  border-radius:5px;
+  text-decoration:none;
+}
+
+/* PRODUCTS */
+.container{
+  padding:40px 20px;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+.card{
+  background:white;
+  border-radius:10px;
+  padding:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card img{
+  width:100%;
+  border-radius:10px;
+}
+
+.card h3{margin:10px 0;}
+
+.price{
+  color:#1b5e20;
+  font-weight:bold;
+}
+
+button{
+  width:100%;
+  padding:10px;
+  margin-top:10px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  font-weight:600;
+}
+
+.add{
+  background:#1b5e20;
+  color:white;
+}
+
+.checkout{
+  background:#25D366;
+  color:white;
+}
+
+/* CART BOX */
+#cartItems{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  background:white;
+  padding:15px;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  width:220px;
+}
+
+/* FOOTER */
+footer{
+  background:#1b5e20;
+  color:white;
+  text-align:center;
+  padding:15px;
+  margin-top:30px;
+}
+
+/* MOBILE */
+@media(max-width:600px){
+  .hero h2{font-size:22px;}
+  #cartItems{width:90%;left:5%;}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Afadiyat Store</h1>
+  <div class="cart-box">Cart: <span id="cartCount">0</span></div>
+</header>
+
+<section class="hero">
+  <h2>Natural Health Products</h2>
+  <p>100% Organic • Pure • Trusted Quality</p>
+  <a href="#products">Shop Now</a>
+</section>
+
+<div class="container">
+  <h2 style="text-align:center;margin-bottom:20px;">Products</h2>
+
+  <div class="products">
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38">
+      <h3>Talbina Mix</h3>
+      <p class="price">Rs 1200</p>
+      <button class="add" onclick="addToCart('Talbina Mix',1200)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38">
+      <h3>Organic Honey</h3>
+      <p class="price">Rs 1500</p>
+      <button class="add" onclick="addToCart('Organic Honey',1500)">Add to Cart</button>
+    </div>
+
+    <div class="card">
+      <img src="https://images.unsplash.com/photo-1587049352846-4a222e784d38">
+      <h3>Herbal Powder</h3>
+      <p class="price">Rs 900</p>
+      <button class="add" onclick="addToCart('Herbal Powder',900)">Add to Cart</button>
+    </div>
+
+  </div>
+</div>
+
+<div id="cartItems">
+  <h4>🛒 Your Cart</h4>
+  <div id="items"></div>
+  <button class="checkout" onclick="checkout()">Order on WhatsApp</button>
+</div>
+
+<footer>
+  © 2026 Afadiyat.com | Natural Health Store
+</footer>
+
+<script>
+let cart = [];
+
+function addToCart(name, price){
+  cart.push({name,price});
+  document.getElementById("cartCount").innerText = cart.length;
+  renderCart();
+}
+
+function renderCart(){
+  let html = "";
+  cart.forEach((item,i)=>{
+    html += `<p>${item.name} - Rs ${item.price}</p>`;
+  });
+  document.getElementById("items").innerHTML = html;
+}
+
+function checkout(){
+  let msg = "Hello, I want to order:%0A";
+  cart.forEach(item=>{
+    msg += `- ${item.name} Rs ${item.price}%0A`;
+  });
+
+  window.open("https://wa.me/923XXXXXXXXX?text=" + msg,"_blank");
+}
+</script>
+
+</body>
+</html>
